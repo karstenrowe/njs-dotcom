@@ -1,0 +1,357 @@
+// Created: @karstenrowe 06-10-2013
+// Project: NJS Equine Therapy web build
+
+// import bootstrap
+@import "bootstrap.less";
+
+
+/* ============================ */
+/* = font = */
+/* ============================ */
+@headline-font: 'Crete Round', serif; // 400
+@body-font: 'Lato', sans-serif; // 400, 700, 400italic
+
+@big: 17px; // line-height: 23px;
+@normal: 15px; // line-height: 21px;
+@small: 13px; // line-height: 16px;
+/* ============================ */
+
+
+/* ============================ */
+/* = toolbox = */
+/* ============================ */
+// retina mixin
+@highdpi: ~"(-webkit-min-device-pixel-ratio: 1.5), (min--moz-device-pixel-ratio: 1.5), (-o-min-device-pixel-ratio: 3/2), (min-resolution: 1.5dppx)";
+
+.2x(@path, @position, @w: auto, @h: auto) {
+	background-image: url(@path);
+	background-repeat: ~"@{position}";
+	@at2x_path: ~`"@{path}".split('.').slice(0, "@{path}".split('.').length - 1).join(".") + "_2x" + "." + "@{path}".split('.')["@{path}".split('.').length - 1]`;
+
+	@media @highdpi {
+		background-image: url(@at2x_path);
+		background-repeat: ~"@{position}";
+		background-size: @w @h;
+	}
+}
+/* ============================ */
+
+
+/* ============================ */
+/* = color = */
+/* ============================ */
+@teal-dk: #143f44;
+@teal: #3b747a;
+@teal-lt: #f1fcff;
+
+@grey-dk: #2b2b2b; // Egg blue grey
+@grey: #555e60;
+@grey-lt: #a8aeaf;
+
+@off-white-dk: darken(@off-white, 5%);
+@off-white: #f9f9f9;
+/* ============================ */
+
+
+/* ============================ */
+/* = selection color = */
+/* ============================ */
+::-moz-selection {
+  text-shadow: none;
+	color: @teal-dk;
+  background: @teal-lt;
+}
+::selection {
+  text-shadow: none;
+	color: @teal-dk;
+  background: @teal-lt;
+}
+/* ============================ */
+
+/* ============================ */
+/* = framework = */
+/* ============================ */
+body {
+	font-family: @body-font;
+	font-size: @normal;
+	font-weight: normal;
+	line-height: 21px;
+	text-shadow: 0 1px 1px rgba(255,255,255, 0.3);
+	color: @grey;
+	background: @off-white;
+  min-height: 880px; // forces scroll so fixed navigation is noticeable on shorter pages
+  padding-top: 100px;
+}
+/* ============================ */
+
+
+/* ============================ */
+/* = typography = */
+/* ============================ */
+h1,
+h2,
+h3 {
+	font-family: @headline-font;
+	line-height: 38px;
+	margin: 22px 0 8px;
+}
+h4,
+h5,
+h6 {
+	font-family: @body-font;
+	font-weight: bold;
+	margin: 16px 0 6px;
+}
+blockquote {
+	font-style: italic;
+	color: @grey;
+	border-color: @grey-lt;
+	cite {
+		color: @teal-dk;
+	}
+}
+/* ============================ */
+
+
+/* ============================ */
+/* = navigation = */
+/* ============================ */
+.navbar {
+	background: #fff;
+	border-color: @off-white-dk;
+
+	.navbar-header {
+		margin: 0 !important; // remove margins from theme
+	}
+	.navbar-toggle {
+		margin-right: 0 !important; // remove margins from mobile theme
+	}
+
+	li {
+		// these styles override theme colors
+		> &.active,
+		&.open {
+			a {
+				cursor: default;
+				color: @teal !important;
+				background-color: @off-white-dk !important;
+			}
+		}
+		&.active-child { // used for dropdown menu items
+			> a {
+				color: @teal;
+				background-color: @off-white-dk !important;
+			}
+		}
+		a:hover {
+			color: @teal !important;
+		}
+	}
+	.dropdown-menu {
+		li {
+			a { color: @grey !important; }
+			&:hover,
+			&.active {
+
+				a { // these styles override theme colors
+					color: @teal !important;
+					background-color: @off-white-dk !important;
+				}
+			}
+		}
+	}
+}
+/* ============================ */
+
+
+/* ============================ */
+/* = branding = */
+/* ============================ */
+.navbar-brand {
+	text-indent: -9999px; // shunt actual text off page, replace with logo outlined below
+	.2x('../img/brand/logo-njs.png', "no-repeat", 148px, 31px);
+	background-position: 0 50%;
+}
+/* ============================ */
+
+
+/* ============================ */
+/* = patterns = */
+/* ============================ */
+.container {
+	// containers
+	.jumbotron {
+		background-color: #fff;
+	  box-shadow: 0 1px 2px rgba(0,0,0, 0.035);
+		border: 1px solid @off-white-dk;
+		h1 {
+			margin: 0 0 18px 0;
+		}
+		h2 {
+			font-style: italic;
+			color: @teal;
+			margin: 0 0 14px 0;
+			a {
+				color: @teal-dk;
+				&:hover {
+					text-decoration: none;
+					color: @grey-dk;
+				}
+			}
+		}
+		.btn-primary {
+			margin: 12px 8px 0 0;
+		}
+		span {
+			font-size: @small;
+			font-style: italic;
+			color: @grey-lt;
+		}
+	}
+	// .row
+	.feature-imgs {
+		text-align: center;
+		margin: 0 0 20px;
+		// img
+		.feature {
+			width: 280px;
+			margin: 0 8px 12px;
+		}
+	}
+	.testimonial {
+		font-family: @headline-font;
+		font-style: italic;
+		text-align: center;
+		color: @teal;
+		padding: 12px 52px;
+		cite {
+			font-family: @body-font;
+			font-size: @small;
+			color: @grey;
+			display: block;
+			margin: 6px 0 0 0;
+		}
+	}
+	.img-body {
+		width: 240px;
+		height: 100%;
+		background: #fff;
+	  box-shadow: 0 1px 2px rgba(0,0,0, 0.06);
+		border: 1px solid @off-white-dk;
+		border-radius: 2px;
+		padding: 1px;
+		margin: 4px;
+		&.left {
+			float: left;
+			margin: 0 24px 14px 0;
+		}
+		&.right {
+			float: right;
+			margin: 0 0 14px 24px;
+		}
+	}
+	.map {
+		width: 100%;
+		min-height: 300px;
+		background: #fff;
+	  box-shadow: 0 1px 2px rgba(0,0,0, 0.035);
+		border: 1px solid @off-white-dk;
+		border-radius: 2px;
+		padding: 1px;
+		margin: 6px 0 12px;
+	}
+	.footer {
+		font-size: 11px;
+		color: lighten(@grey, 20%);
+		.2x('../img/brand/logo-symbol-njs.png', "no-repeat", 61px, 50px);
+		background-position: 50% 50%;
+		margin: 20px 0 40px;
+		padding: 20px 0 40px;
+		.left {
+			float: left;
+		}
+		.right {
+			float: right;
+		}
+		.contact-detail {
+			color: lighten(@grey, 40%);
+			margin-left: 6px;
+		}
+	}
+	// links
+	a {
+		color: @teal;
+		&:hover {
+			color: @teal-dk;
+		}
+	}
+	// buttons
+	.btn-primary {
+	  color: #ffffff;
+	  background-color: @teal;
+	  //box-shadow: inset 0 1px 2px rgba(0,0,0, 0.1), 0 1px 2px rgba(255,255,255, 0.5);
+	  border-color: @teal;
+		&:hover {
+		  color: #ffffff;
+		  background-color: @teal-dk;
+		  //box-shadow: inset 0 1px 2px rgba(0,0,0, 0.1), 0 1px 2px rgba(255,255,255, 0.85);
+		  border-color: black;
+		}
+	}
+}
+/* ============================ */
+
+
+/* ============================ */
+/* = page: news = */
+/* ============================ */
+.container {
+
+	.news-item { // add space between each news item
+		margin: 40px 0;
+
+		h3 {
+			color: @teal;
+			span {
+				font-size: @small;
+				color: @grey-lt;
+				margin-left: 12px;
+			}
+		}
+
+		cite {
+			font-family: @headline-font;
+			display: block;
+			margin: 8px 0;
+		}
+	}
+}
+/* ============================ */
+
+
+/* ============================ */
+/* = media queries: small screen = */
+/* ============================ */
+@media (max-width: 768px) {
+	.container {
+		// minor adjustment to typography
+		h2,
+		h3 {
+			font-size: 20px;
+			line-height: 26px;
+		}
+		.img-body { // hide photos on mobile
+			display: none;
+		}
+	  .footer {
+		  background: none; // hide footer logo
+		  .footer-info { // center align footer content
+		  	text-align: center;
+			  float: none;
+			  display: block;
+		  }
+	  }
+	}
+}
+/* ============================ */
+
